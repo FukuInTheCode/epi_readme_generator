@@ -10,6 +10,8 @@ if ! git clone "$1" tmp/ &> /dev/null; then
     exit 84
 fi
 
+cd tmp/
+
 commit_message="[~] Update the README.md"
 
 if ! [ -e tmp/README.md ]; then
@@ -27,23 +29,26 @@ echo -e "# $project_name\n" > README.md
 read -ep "What module the project is part of? (empty for none) -> " module_name
 
 if ! [ -z "$module_name" ]; then
-    read -ep "What grade do you acquired for $project_name? (empty if the module is not finished) -> " module_grade
+    read -ep "What grade do you acquired for $module_name? (empty if the module is not finished) -> " module_grade
     if [ -z "$module_grade" ]; then
         module_grade="N/A"
     fi
-    echo -e "## Module\n - $module_name ($module_grade)\n" >> README.md
+    echo -e "## Module: $module_name (Grade: $module_grade)\n" >> README.md
 fi
 
 read -ep "What is the description for this project? (empty for none) -> " project_desc
 
-#cd tmp/
+if ! [ -z "$project_desc" ]; then
+    echo -e "## Project Description\n $project_desc\n" >> README.md
+fi
 
-#git add README.md &> /dev/null
 
-#git commit -m "$commit_message" &> /dev/null
+git add README.md &> /dev/null
 
-#git push -f origin main &> /dev/null
+git commit -m "$commit_message" &> /dev/null
 
-#cd - &> /dev/null
+git push -f origin main &> /dev/null
+
+cd - &> /dev/null
 
 rm -rf tmp/

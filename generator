@@ -1,0 +1,14 @@
+#! /bin/bash
+
+if ! [ $# -eq 1 ]; then
+    echo -e "USAGE:\n ./generator sshkey_of_the_repository" >&2
+    exit 84
+fi
+
+if ! git clone "$1" tmp/ &> /dev/null; then
+    echo "Error: cannot find $1!"
+fi
+
+echo -n "" > tmp/READMY.md
+
+rm -rf tmp/

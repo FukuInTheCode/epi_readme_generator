@@ -7,8 +7,25 @@ fi
 
 if ! git clone "$1" tmp/ &> /dev/null; then
     echo "Error: cannot find $1!"
+    exit 84
 fi
 
-echo -n "" > tmp/READMY.md
+commit_message="[~] Update the README.md"
+
+if ! [ -e tmp/README.md ]; then<
+    commit_message="[+] Add the README.md"
+fi
+
+echo -n "" > tmp/README.md
+
+cd tmp/
+
+git add README.md &> /dev/null
+
+git commit -m "$commit_message" &> /dev/null
+
+git push -f origin main &> /dev/null
+
+cd - &> /dev/null
 
 rm -rf tmp/

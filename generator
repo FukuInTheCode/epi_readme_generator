@@ -12,20 +12,38 @@ fi
 
 commit_message="[~] Update the README.md"
 
-if ! [ -e tmp/README.md ]; then<
+if ! [ -e tmp/README.md ]; then
     commit_message="[+] Add the README.md"
 fi
 
-echo -n "" > tmp/README.md
+read -ep "What is the name of the project? -> " project_name
 
-cd tmp/
+if [ -z "$project_name" ]; then
+    project_name="$1"
+fi
 
-git add README.md &> /dev/null
+echo -e "# $project_name\n" > README.md
 
-git commit -m "$commit_message" &> /dev/null
+read -ep "What module the project is part of? (empty for none) -> " module_name
 
-git push -f origin main &> /dev/null
+if ! [ -z "$module_name" ]; then
+    read -ep "What grade do you acquired for $project_name? (empty if the module is not finished) -> " module_grade
+    if [ -z "$module_grade" ]; then
+        module_grade="N/A"
+    fi
+    echo -e "## Module\n - $module_name ($module_grade)\n" >> README.md
+fi
 
-cd - &> /dev/null
+read -ep "What is the description for this project? (empty for none) -> " project_desc
+
+#cd tmp/
+
+#git add README.md &> /dev/null
+
+#git commit -m "$commit_message" &> /dev/null
+
+#git push -f origin main &> /dev/null
+
+#cd - &> /dev/null
 
 rm -rf tmp/

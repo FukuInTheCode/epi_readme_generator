@@ -42,6 +42,14 @@ if ! [ -z "$project_desc" ]; then
     echo -e "## Project Description\n $project_desc\n" >> README.md
 fi
 
+while true; do
+    read -ep "Add the tests (empty for stop) -> " tests_str
+    if [ -n tests_str ]; then
+        break
+    fi
+    # python3 ../main.py "$tests_str" >> README.md
+    # echo >> README.md
+done
 
 git add README.md &> /dev/null
 

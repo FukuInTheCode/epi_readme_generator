@@ -48,18 +48,39 @@ if ! [ -z "$project_desc" ]; then
     echo -e "## Project Description\n $project_desc\n" >> README.md
 fi
 
+read -ep "Enter Project Result (default 100%) -> " project_result
+
+if [ -z "$project_result" ]; then
+    project_result="100%"
+fi
+
+echo "# Result: $project_result" >> README.md
+
+do_add_test=0
+
 while true; do
     read -ep "Add the tests (empty for stop) -> " tests_str
     if [ -z "$tests_str" ]; then
+        if [ $do_add_test == 1 ]; then
+            echo "</details>" >> README.md
+        fi
         break
+    fi
+    if [ $do_add_test == 0 ]; then
+        do_add_test=1
+        echo "<details>" >> README.md
+        echo "<summary>Click to expand test results</summary>" >> README.md
+        echo >> README.md
     fi
     formatted="$(python3 ../main.py "$tests_str")"
     if [ "$?" != 0 ]; then
         echo "ERROR: Incorrect input!"
-        continue;
+        continue
     fi
     echo "$formatted" >> README.md
+    echo >> README.md
 done
+
 
 git add README.md &> /dev/null
 

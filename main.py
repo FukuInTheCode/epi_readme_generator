@@ -4,7 +4,7 @@ import sys
 # Function to generate Markdown table from input
 def generate_markdown_table(input_text):
     # Split the input into lines
-    lines = input_text.strip().split("\t")
+    lines = input_text.strip().split("||")
 
     # Initialize the table header
     table = "| Test | Status |\n| --- | --- |"

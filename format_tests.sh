@@ -6,4 +6,7 @@ if ! [ $# -eq 1 ]; then
     exit 1
 fi
 
-echo -n "$1" | tr '\n' '\t' | sed "s/keyboard_arrow_right//gi"
+echo -n "$1" | sed "s/keyboard_arrow_right//gi" > format_tmp
+sed "s/$/||/" format_tmp | tr -d '\n'
+
+rm -f format_tmp

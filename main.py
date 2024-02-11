@@ -9,12 +9,12 @@ def generate_markdown_table(input_text):
     # Initialize the table header
     table = "| Test | Status |\n| --- | --- |"
 
-    lines = [line for line in lines if line != "'"]
-    start = 7 if "warning" not in lines else 9
+    lines = [line for line in lines if line != ""]
+    start = 6 if "warning" not in lines else 8
     # Iterate through the lines and add rows to the table
-    for i in range(start, len(lines), 5):
+    for i in range(start, len(lines), 2):
         test_name = lines[i]
-        result = lines[i + 3]
+        result = lines[i + 1]
         if result != "PASSED" and "Crash" not in result:
             result = "FAILURE"
         elif "Crash" in result:

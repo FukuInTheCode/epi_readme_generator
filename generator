@@ -53,8 +53,12 @@ while true; do
     if [ -z "$tests_str" ]; then
         break
     fi
-    python3 ../main.py "$tests_str" >> README.md
-    echo >> README.md
+    formatted="$(python3 ../main.py "$tests_str")"
+    if [ "$?" != 0 ]; then
+        echo "ERROR: Incorrect input!"
+        continue;
+    fi
+    echo "$formatted" >> README.md
 done
 
 git add README.md &> /dev/null

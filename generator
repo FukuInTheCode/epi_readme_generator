@@ -68,7 +68,7 @@ while true; do
     read -ep "Add the tests (empty for stop) -> " tests_str
     if [ -z "$tests_str" ]; then
         if [ $do_add_test == 1 ]; then
-            echo "</details>" >> README.md
+            echo "</details>\n" >> README.md
         fi
         break
     fi
@@ -101,6 +101,12 @@ if ! [ -z "$project_tests" ]; then
     echo "## Tests" >> README.md
     echo "$project_tests" >> README.md
     echo >> README.md
+fi
+
+read -ep "Do you want to check the READ.md ? (y/N)" check
+
+if [ "$check" == "y" ] || [ "check" == "Y" ]; then
+    nano README.md
 fi
 
 git add README.md &> /dev/null

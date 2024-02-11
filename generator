@@ -51,7 +51,8 @@ fi
 read -ep "Enter the usage (empty for none) -> " project_usage
 
 if ! [ -z "$project_usage" ]; then
-    echo "### USAGE\n $project_usage" >> README.md
+    echo "### USAGE" >> README.md
+    echo " $project_usage" >> README.md
 fi
 
 read -ep "Enter Project Result (default 100%) -> " project_result
@@ -68,7 +69,8 @@ while true; do
     read -ep "Add the tests (empty for stop) -> " tests_str
     if [ -z "$tests_str" ]; then
         if [ $do_add_test == 1 ]; then
-            echo "</details>\n" >> README.md
+            echo "</details>" >> README.md
+            echo >> README.md
         fi
         break
     fi

@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if ! [ $# -eq 1 ]; then
-    echo "USAGE:"
-    echo "\t./format_tests.sh \"pasted_tests_string\""
-    exit 1
+    input="$(wl-paste)"
+else
+    input="$1"
 fi
 
-echo -n "$1" | sed "s/keyboard_arrow_right//gi" > format_tmp
-sed "s/$/||/" format_tmp | tr -d '\n'
+echo -n "$input" | sed "s/keyboard_arrow_right//gi" > format_tmp
+sed "s/$/||/" format_tmp | tr -d '\n' | wl-copy
 
 rm -f format_tmp

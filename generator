@@ -26,6 +26,12 @@ fi
 
 echo -e "# $project_name\n" > README.md
 
+read -ep "Add teammates -> " teammates
+
+if [ ! -z "$teammates" ]; then
+    echo -e " DONE WITH $teammates" >> README.md
+fi
+
 read -ep "What module the project is part of? (empty for none) -> " module_name
 
 if ! [ -z "$module_name" ]; then

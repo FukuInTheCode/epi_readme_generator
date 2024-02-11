@@ -48,6 +48,12 @@ if ! [ -z "$project_desc" ]; then
     echo -e "## Project Description\n $project_desc\n" >> README.md
 fi
 
+read -ep "Enter the usage (empty for none) -> " project_usage
+
+if ! [ -z "$project_usage" ]; then
+    echo "### USAGE\n $project_usage" >> README.md
+fi
+
 read -ep "Enter Project Result (default 100%) -> " project_result
 
 if [ -z "$project_result" ]; then

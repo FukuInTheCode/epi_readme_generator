@@ -81,6 +81,21 @@ while true; do
     echo >> README.md
 done
 
+read -ep "What Bonuses ? (empty for no bonuses) -> " project_bonus
+
+if ! [ -z "$project_bonus" ]; then
+    echo "## Bonuses" >> README.md
+    echo "$project_bonus" >> README.md
+    echo >> README.md
+fi
+
+read -ep "What Tests? (empty for no tests) -> " project_tests
+
+if ! [ -z "$project_tests" ]; then
+    echo "## Tests" >> README.md
+    echo "$project_tests" >> README.md
+    echo >> README.md
+fi
 
 git add README.md &> /dev/null
 
